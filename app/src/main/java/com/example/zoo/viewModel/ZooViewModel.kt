@@ -6,6 +6,7 @@ import androidx.lifecycle.viewModelScope
 import com.example.zoo.model.Animal
 import com.example.zoo.model.User
 import com.example.zoo.repository.ZooRepository
+import com.example.zoo.repository.dto.LoginDTO
 import kotlinx.coroutines.launch
 
 
@@ -25,7 +26,8 @@ class ZooViewModel : ViewModel() {
     fun login(username: String, password: String) {
         viewModelScope.launch {
             try {
-                repository.login(username, password)?.let { user ->
+                val loginDTO = LoginDTO(username, password)
+                repository.login(loginDTO)?.let { user ->
                     _loginState.value = user
                     loadAnimalsForUser(user)
                 } ?: run {

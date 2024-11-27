@@ -3,6 +3,7 @@ package com.example.zoo.repository
 import android.util.Log
 import com.example.zoo.model.Animal
 import com.example.zoo.model.User
+import com.example.zoo.repository.dto.LoginDTO
 import com.example.zoo.repository.mapper.AnimalMapper
 import com.example.zoo.repository.mapper.UserMapper
 import com.example.zoo.repository.retrofit.RetrofitInstance
@@ -11,12 +12,12 @@ class ZooRepository {
     private val api = RetrofitInstance.api
 
 
-    suspend fun login(username: String, password: String): User? {
+    suspend fun login(loginDTO: LoginDTO): User? {
         return try {
             val response = api.getUsers()
             if (response.isSuccessful) {
                 val userDTO = response.body()?.find { dto ->
-                    dto.username == username && dto.password == password
+                    dto.username == loginDTO.username && dto.password == loginDTO.password
                 }
                 userDTO?.let { dto -> UserMapper.toUser(dto) }
             } else {
