@@ -38,7 +38,7 @@ class MainActivity : AppCompatActivity() {
                 passwordEditText.visibility = View.GONE
                 recyclerView.visibility = View.VISIBLE
 
-                // Affiche le bouton d'ajout uniquement pour les vétérinaires
+                // On va afficher le boton de la vue uniquement pour le véto
                 if (user.role == "VETERINARIAN") {
                     addAnimalButton.visibility = View.VISIBLE
                 } else {
@@ -77,12 +77,12 @@ class MainActivity : AppCompatActivity() {
             val species = findViewById<EditText>(R.id.animalSpeciesEditText).text.toString()
             val age = findViewById<EditText>(R.id.animalAgeEditText).text.toString().toIntOrNull() ?: 0
             val healthStatus = findViewById<EditText>(R.id.animalHealthEditText).text.toString()
-            val keeperId = findViewById<EditText>(R.id.animalKeeperIdEditText).text.toString().toIntOrNull() ?: 0
+            val keeperId = findViewById<EditText>(R.id.animalKeeperIdEditText).text.toString()
             val diet = findViewById<EditText>(R.id.animalDietEditText).text.toString()
 
             if (name.isNotEmpty() && species.isNotEmpty() && healthStatus.isNotEmpty() &&
-                diet.isNotEmpty() && keeperId != 0) {
-                viewModel.createAnimal(name, species, age, healthStatus, keeperId.toString(), diet)
+                diet.isNotEmpty() && keeperId.isNotEmpty()) {
+                viewModel.createAnimal(name, species, age, healthStatus, keeperId, diet)
                 addAnimalForm.visibility = View.GONE
             }
         }

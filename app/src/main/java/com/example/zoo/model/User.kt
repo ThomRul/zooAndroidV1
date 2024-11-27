@@ -7,7 +7,7 @@ class User {
     val role : String
     val email : String
 
-    //création d'une personne de base (dans le cas d'un register
+    //création d'une personne de base (dans le cas d'un register)
     constructor(
         username: String,
         email : String,
@@ -17,7 +17,7 @@ class User {
         this.username = username
         this.email = email
         this.password = password
-        this.role = "USER"
+        this.role = "KEEPER"
     }
 
     //constructeur complet
